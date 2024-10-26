@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/appbar.dart';
+import 'package:gym_app/home.dart';
+import 'package:gym_app/about.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,67 +13,38 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primaryColor: Colors.blueAccent,
+        brightness: Brightness.dark,
         useMaterial3: true,
+        appBarTheme: const AppBarTheme(
+          color: Colors.blueAccent,
+        ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text('Home Page', style: TextStyle(fontSize: 24)),
-    Text('Search Page', style: TextStyle(fontSize: 24)),
-    Text('Profile Page', style: TextStyle(fontSize: 24)),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+class MyHomePage extends StatelessWidget { // Changed to StatelessWidget
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+    return const SafeArea(
+      child: DefaultTabController(
+        length: 3,
+        initialIndex: 0,
+        child: Scaffold(
+          appBar: CustomAppBar(),
+          body: TabBarView(
+            children: [
+              Home(),
+              About(),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Theme.of(context).colorScheme.primary,
-        onTap: _onItemTapped,
+        ),
       ),
     );
   }
