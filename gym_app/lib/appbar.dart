@@ -1,47 +1,76 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  final bool isDarkMode;
+  final VoidCallback toggleTheme;
+  final List<String> menuItems;
+  final ValueChanged<String?> onMenuItemSelected;
+
+  const CustomAppBar({
+    super.key,
+    required this.isDarkMode,
+    required this.toggleTheme,
+    required this.menuItems,
+    required this.onMenuItemSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: AppBar(
-        // Add padding to the AppBar itself
-        toolbarHeight: 80.0,
-        title:const Padding(
-          padding: EdgeInsets.only(
-              top: 16.0),
-          child: Text(
-            "Fitness App",
-            style: TextStyle(fontSize: 24), // Adjust font size if necessary
+    return AppBar(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Dropdown menu for navigation
+          DropdownButton<String>(
+            icon: Icon(
+              Icons.menu,
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
+            items: menuItems.map((String item) {
+              return DropdownMenuItem<String>(
+                value: item,
+                child: Text(item),
+              );
+            }).toList(),
+            onChanged: onMenuItemSelected,
+            underline: Container(), // Hide underline
           ),
-        ),
-        centerTitle: true,
-        actions: [
+
+          // Centered title
+          Expanded(
+            child: Center(
+              child: Text(
+                "Fitness App",
+                style: Theme.of(context).appBarTheme.titleTextStyle,
+              ),
+            ),
+          ),
+
+          // Toggle button for theme
           IconButton(
-            icon: const Icon(Icons.search, size: 30),
-            onPressed: () {
-              // Implement search functionality here
-            },
-          ),
-          // Toggle Button (Switch) without any action
-          const Switch(
-            value:
-                false, // Change this to true if you want it to be initially toggled on
-            onChanged: null, // No action performed on change
+            // IconButton(
+            //   icon: Icon(
+            //     Icons.search,
+            //     size: 30,
+            //     color: isDarkMode ? Colors.white : Colors.black,
+            //   ),
+            //   onPressed: () {
+            //     // Implement search functionality here
+            //   },
+            // ),
+            onPressed: toggleTheme,
+            icon: Icon(
+              isDarkMode ? Icons.toggle_off : Icons.toggle_on,
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
           ),
         ],
-        bottom: const TabBar(
-          tabs: [
-            Tab(icon: Icon(Icons.home), text: "Home"),
-            Tab(icon: Icon(Icons.favorite), text: "About"),
-          ],
-        ),
       ),
+      backgroundColor: isDarkMode ? Colors.black : Colors.blueAccent,
+      centerTitle: true,
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 48.0);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
