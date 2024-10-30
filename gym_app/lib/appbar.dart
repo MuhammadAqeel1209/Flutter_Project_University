@@ -40,7 +40,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Expanded(
             child: Center(
               child: Text(
-                "Fitness App",
+                "Gym Management",
                 style: Theme.of(context).appBarTheme.titleTextStyle,
               ),
             ),

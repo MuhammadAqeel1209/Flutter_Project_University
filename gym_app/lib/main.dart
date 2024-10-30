@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gym_app/appbar.dart';
 import 'package:gym_app/home.dart';
 import 'package:gym_app/about.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +25,6 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,26 +34,34 @@ class _MyAppState extends State<MyApp> {
         fontFamily: "AbrilFatface", // Set the font family here
         primaryColor: Colors.blueAccent,
         textTheme: TextTheme(
-          displayLarge: TextStyle(
-            fontSize: 45.0,
-            fontWeight: FontWeight.bold,
-            color: _isDarkMode ? Colors.white : Colors.black,
-          ),
-          bodyLarge: TextStyle(
-            fontSize: 26.0,
-            color: _isDarkMode ? Colors.white70 : Colors.black87,
-          ),
-          bodyMedium: TextStyle(
-            fontSize: 20.0,
-            color: _isDarkMode ? Colors.white60 : Colors.black54,
-          ),
-        ),
+            displayLarge: TextStyle(
+              fontSize: 45.0,
+              fontWeight: FontWeight.bold,
+              color: _isDarkMode ? Colors.white : Colors.black,
+            ),
+            bodyLarge: TextStyle(
+              fontSize: 26.0,
+              fontWeight: FontWeight.bold,
+              color: _isDarkMode ? Colors.white70 : Colors.black87,
+            ),
+            bodyMedium: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: _isDarkMode ? Colors.white60 : Colors.black54,
+            ),
+            headlineSmall: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+              color: _isDarkMode ? Colors.white60 : Colors.black54,
+            )),
         appBarTheme: AppBarTheme(
           backgroundColor: _isDarkMode ? Colors.black : Colors.blueAccent,
-          titleTextStyle: TextStyle(
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-            color: _isDarkMode ? Colors.white : Colors.black,
+          titleTextStyle: GoogleFonts.timmana(
+            textStyle: TextStyle(
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+              color: _isDarkMode ? Colors.white : Colors.black,
+            ),
           ),
         ),
       ),
@@ -87,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if (value == 'Home') {
         _currentScreen = const Home();
       } else if (value == 'About') {
-        _currentScreen = const About();
+        _currentScreen = About();
       }
     });
   }
