@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gym_app/appbar.dart';
 import 'package:gym_app/home.dart';
 import 'package:gym_app/about.dart';
-import 'package:gym_app/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,6 +11,7 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 

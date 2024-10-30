@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/signup.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
