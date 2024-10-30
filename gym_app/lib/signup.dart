@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/signup.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Signup extends StatefulWidget {
+  const Signup({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Signup> createState() => _SignupSate();
 }
 
-class _LoginState extends State<Login> {
+class _SignupSate extends State<Signup> {
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
 
@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Welcome back",
+                Text("Registration",
                     style: Theme.of(context).textTheme.displayLarge),
                 const SizedBox(height: 16),
                 TextField(
@@ -69,15 +69,6 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                TextButton(
-                  onPressed: () {},
-                  child: Text("Forgot Password?",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.copyWith(color: Colors.white)),
-                ),
-                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
@@ -88,24 +79,12 @@ class _LoginState extends State<Login> {
                   ),
                   child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 48.0),
-                      child: Text("LOGIN",
+                      child: Text("Sign Up",
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium
                               ?.copyWith(color: Colors.blue))),
                 ),
-                const SizedBox(height: 24),
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder:(context) => const Signup()));
-                    },
-                    child: Text(
-                      "Don't have an Account? Sign Up",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: Colors.white),
-                    )),
               ],
             ),
           ),

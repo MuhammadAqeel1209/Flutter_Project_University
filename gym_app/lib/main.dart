@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gym_app/appbar.dart';
 import 'package:gym_app/home.dart';
 import 'package:gym_app/about.dart';
+import 'package:gym_app/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,7 +44,7 @@ class _MyAppState extends State<MyApp> {
             color: _isDarkMode ? Colors.white70 : Colors.black87,
           ),
           bodyMedium: TextStyle(
-            fontSize: 16.0,
+            fontSize: 20.0,
             color: _isDarkMode ? Colors.white60 : Colors.black54,
           ),
         ),

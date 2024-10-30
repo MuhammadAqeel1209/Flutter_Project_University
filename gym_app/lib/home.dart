@@ -66,7 +66,7 @@ class Home extends StatelessWidget {
                   padding: const EdgeInsets.all(18.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder:(context) => const Login()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white, backgroundColor: Colors.orange, minimumSize: const Size(130, 60), // text color
