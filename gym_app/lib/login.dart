@@ -9,15 +9,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final FocusNode emailFocusNode = FocusNode();
-  final FocusNode passwordFocusNode = FocusNode();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
-  @override
-  void dispose() {
-    emailFocusNode.dispose();
-    passwordFocusNode.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +34,7 @@ class _LoginState extends State<Login> {
                     style: Theme.of(context).textTheme.displayLarge),
                 const SizedBox(height: 16),
                 TextField(
-                  focusNode: emailFocusNode,
+                  controller: _emailController,
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Email',
@@ -55,7 +49,7 @@ class _LoginState extends State<Login> {
                 ),
                 const SizedBox(height: 16),
                 TextField(
-                  focusNode: passwordFocusNode,
+                  controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Password',
@@ -87,8 +81,8 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 48.0),
-                      child: Text("LOGIN",
+                      padding: const EdgeInsets.symmetric(horizontal: 48.0,vertical: 15.0),
+                      child: Text("Login",
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium

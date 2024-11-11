@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gym_app/appbar.dart';
 import 'package:gym_app/home.dart';
 import 'package:gym_app/about.dart';
+import 'package:gym_app/trainer.dart';
+import 'package:gym_app/classes.dart';
+import 'package:gym_app/package.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -12,8 +15,7 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -31,29 +33,28 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: _isDarkMode ? Brightness.dark : Brightness.light,
-        fontFamily: "AbrilFatface", // Set the font family here
-        primaryColor: Colors.blueAccent,
         textTheme: TextTheme(
-            displayLarge: TextStyle(
-              fontSize: 45.0,
-              fontWeight: FontWeight.bold,
-              color: _isDarkMode ? Colors.white : Colors.black,
-            ),
-            bodyLarge: TextStyle(
-              fontSize: 26.0,
-              fontWeight: FontWeight.bold,
-              color: _isDarkMode ? Colors.white70 : Colors.black87,
-            ),
-            bodyMedium: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-              color: _isDarkMode ? Colors.white60 : Colors.black54,
-            ),
-            headlineSmall: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-              color: _isDarkMode ? Colors.white60 : Colors.black54,
-            )),
+          displayLarge: TextStyle(
+            fontSize: 45.0,
+            fontWeight: FontWeight.bold,
+            color: _isDarkMode ? Colors.white : Colors.black,
+          ),
+          bodyLarge: TextStyle(
+            fontSize: 26.0,
+            fontWeight: FontWeight.bold,
+            color: _isDarkMode ? Colors.white70 : Colors.black87,
+          ),
+          bodyMedium: TextStyle(
+            fontSize: 24.0,
+            fontWeight: FontWeight.bold,
+            color: _isDarkMode ? Colors.white : Colors.black,
+          ),
+          headlineSmall: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            color: _isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
         appBarTheme: AppBarTheme(
           backgroundColor: _isDarkMode ? Colors.black : Colors.blueAccent,
           titleTextStyle: GoogleFonts.timmana(
@@ -84,18 +85,29 @@ class MyHomePage extends StatefulWidget {
   });
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Widget _currentScreen = const Home(); // Default screen
+  Widget _currentScreen = const Home();
 
   void _onMenuItemSelected(String? value) {
     setState(() {
-      if (value == 'Home') {
-        _currentScreen = const Home();
-      } else if (value == 'About') {
-        _currentScreen = About();
+      switch (value) {
+        case 'Home':
+          _currentScreen = const Home();
+          break;
+        case 'About':
+          _currentScreen =  About();
+          break;
+        case 'Trainer':
+          _currentScreen = const TrainersPage();
+          break;
+        case 'Classes':
+          _currentScreen = const ClassesPage();
+          break;
+        case 'MemberShip' :
+          _currentScreen =  const MembershipPage();
       }
     });
   }
@@ -107,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: CustomAppBar(
           isDarkMode: widget.isDarkMode,
           toggleTheme: widget.toggleTheme,
-          menuItems: const ['Home', 'About'],
+          menuItems: const ['Home', 'About','Trainer','Classes','MemberShip'],
           onMenuItemSelected: _onMenuItemSelected,
         ),
         body: _currentScreen,

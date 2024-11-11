@@ -30,42 +30,45 @@ class Home extends StatelessWidget {
               const SizedBox(height: 16), // Space between image and text
               Column(
                 children: [
-                  Center(
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Make ',
-                            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                              color: Colors.orange,
-                              fontWeight: FontWeight.bold,
-                            ),
+             Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Make',
+                          style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                            color: Colors.orange,
+                            fontWeight: FontWeight.bold,
                           ),
-                          TextSpan(
-                            text: 'Your Body \n',
-                            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Your Body',
+                          style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
                           ),
-                          TextSpan(
-                            text: 'Health & Fit\n\n',
-                            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Health & Fit',
+                          style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
                           ),
-                          TextSpan(
-                            text: "Best Gym & Fitness Center\nBuild Your Health & Ultimate Fitness Solution",
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        ],
-                      ),
-                    ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          "Best Gym & Fitness Center\nBuild Your Health & Ultimate Fitness Solution",
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                   ),
-                  const SizedBox(height: 24), // Adds spacing before button
+                  const SizedBox(height: 24),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(

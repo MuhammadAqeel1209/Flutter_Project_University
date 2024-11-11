@@ -18,10 +18,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start, // Align items to the start
         children: [
-          // Dropdown menu for navigation
+          // Main menu icon (dropdown) at the start of the row
           DropdownButton<String>(
+            alignment: Alignment.topLeft,
             icon: Icon(
               Icons.menu,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -29,14 +30,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             items: menuItems.map((String item) {
               return DropdownMenuItem<String>(
                 value: item,
-                child: Text(item),
+                child: Text(
+                  item,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               );
             }).toList(),
             onChanged: onMenuItemSelected,
             underline: Container(), // Hide underline
           ),
 
-          // Centered title
+          // Expanded widget to center the title in the AppBar
           Expanded(
             child: Center(
               child: Text(
@@ -46,18 +50,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
 
-          // Toggle button for theme
+          // Toggle button for theme (right-aligned)
           IconButton(
-            // IconButton(
-            //   icon: Icon(
-            //     Icons.search,
-            //     size: 30,
-            //     color: isDarkMode ? Colors.white : Colors.black,
-            //   ),
-            //   onPressed: () {
-            //     // Implement search functionality here
-            //   },
-            // ),
             onPressed: toggleTheme,
             icon: Icon(
               isDarkMode ? Icons.toggle_off : Icons.toggle_on,

@@ -8,18 +8,11 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupSate extends State<Signup> {
-  final FocusNode emailFocusNode = FocusNode();
-  final FocusNode passwordFocusNode = FocusNode();
-  final FocusNode firstNameFocusNode = FocusNode();
-  final FocusNode lastNameFocusNode = FocusNode();
-  final FocusNode ageFocusNode = FocusNode();
-
-  @override
-  void dispose() {
-    emailFocusNode.dispose();
-    passwordFocusNode.dispose();
-    super.dispose();
-  }
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,45 +31,20 @@ class _SignupSate extends State<Signup> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Registration",
-                    style: Theme.of(context).textTheme.displayLarge),
+                Text(
+                  "New User Registration",
+                  style: Theme.of(context).textTheme.displayLarge,
+                  textAlign: TextAlign.center,
+                ),
                 const SizedBox(height: 16),
                 TextField(
-                  focusNode: firstNameFocusNode,
+                  controller: _firstNameController,
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'First Name',
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.2),
-                    prefixIcon: const Icon(Icons.supervised_user_circle, color: Colors.white),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),const SizedBox(height: 16),
-                TextField(
-                  focusNode: lastNameFocusNode,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Last Name',
-                    filled: true,
-                    fillColor: Colors.white.withOpacity(0.2),
-                    prefixIcon: const Icon(Icons.supervised_user_circle, color: Colors.white),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),const SizedBox(height: 16),
-                TextField(
-                  focusNode: ageFocusNode,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Age',
-                    filled: true,
-                    fillColor: Colors.white.withOpacity(0.2),
-                    prefixIcon: const Icon(Icons.calendar_today, color: Colors.white),
+                    prefixIcon: const Icon(Icons.person, color: Colors.white),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20.0),
                       borderSide: BorderSide.none,
@@ -85,7 +53,38 @@ class _SignupSate extends State<Signup> {
                 ),
                 const SizedBox(height: 16),
                 TextField(
-                  focusNode: emailFocusNode,
+                  controller: _lastNameController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: 'Last Name',
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.2),
+                    prefixIcon: const Icon(Icons.person, color: Colors.white),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _ageController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: 'Age',
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.2),
+                    prefixIcon:
+                        const Icon(Icons.calendar_today, color: Colors.white),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _emailController,
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Email',
@@ -100,7 +99,7 @@ class _SignupSate extends State<Signup> {
                 ),
                 const SizedBox(height: 16),
                 TextField(
-                  focusNode: passwordFocusNode,
+                  controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Password',
@@ -115,7 +114,9 @@ class _SignupSate extends State<Signup> {
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.blue, // Button color
                     shape: RoundedRectangleBorder(
@@ -123,7 +124,7 @@ class _SignupSate extends State<Signup> {
                     ),
                   ),
                   child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 48.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 48.0,vertical: 15.0),
                       child: Text("Sign Up",
                           style: Theme.of(context)
                               .textTheme
