@@ -17,49 +17,37 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.start, // Align items to the start
-        children: [
-          // Main menu icon (dropdown) at the start of the row
-          DropdownButton<String>(
-            alignment: Alignment.topLeft,
-            icon: Icon(
-              Icons.menu,
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
-            items: menuItems.map((String item) {
-              return DropdownMenuItem<String>(
-                value: item,
-                child: Text(
-                  item,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              );
-            }).toList(),
-            onChanged: onMenuItemSelected,
-            underline: Container(), // Hide underline
-          ),
-
-          // Expanded widget to center the title in the AppBar
-          Expanded(
-            child: Center(
-              child: Text(
-                "Gym Management",
-                style: Theme.of(context).appBarTheme.titleTextStyle,
-              ),
-            ),
-          ),
-
-          // Toggle button for theme (right-aligned)
-          IconButton(
-            onPressed: toggleTheme,
-            icon: Icon(
-              isDarkMode ? Icons.toggle_off : Icons.toggle_on,
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
-          ),
-        ],
+      title: Text(
+        "Gym Management",
+        style: Theme.of(context).appBarTheme.titleTextStyle,
       ),
+      leading: PopupMenuButton<String>(
+        icon: Icon(
+          Icons.menu,
+          color: isDarkMode ? Colors.white : Colors.black,
+        ),
+        onSelected: onMenuItemSelected,
+        itemBuilder: (BuildContext context) {
+          return menuItems.map((String item) {
+            return PopupMenuItem<String>(
+              value: item,
+              child: Text(
+                item,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+            );
+          }).toList();
+        },
+      ),
+      actions: [
+        IconButton(
+          onPressed: toggleTheme,
+          icon: Icon(
+            isDarkMode ? Icons.toggle_off : Icons.toggle_on,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
+      ],
       backgroundColor: isDarkMode ? Colors.black : Colors.blueAccent,
       centerTitle: true,
     );

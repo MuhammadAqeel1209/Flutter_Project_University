@@ -5,7 +5,6 @@ import 'package:gym_app/about.dart';
 import 'package:gym_app/trainer.dart';
 import 'package:gym_app/classes.dart';
 import 'package:gym_app/package.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +31,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Roboto',
         brightness: _isDarkMode ? Brightness.dark : Brightness.light,
         textTheme: TextTheme(
           displayLarge: TextStyle(
@@ -50,22 +50,21 @@ class _MyAppState extends State<MyApp> {
             color: _isDarkMode ? Colors.white : Colors.black,
           ),
           headlineSmall: TextStyle(
-            fontSize: 18.0,
+            fontSize: 20.0,
             fontWeight: FontWeight.bold,
             color: _isDarkMode ? Colors.white : Colors.black,
           ),
         ),
         appBarTheme: AppBarTheme(
           backgroundColor: _isDarkMode ? Colors.black : Colors.blueAccent,
-          titleTextStyle: GoogleFonts.timmana(
-            textStyle: TextStyle(
+          titleTextStyle:TextStyle(
               fontSize: 30.0,
               fontWeight: FontWeight.bold,
               color: _isDarkMode ? Colors.white : Colors.black,
             ),
           ),
         ),
-      ),
+
       home: MyHomePage(
         isDarkMode: _isDarkMode,
         toggleTheme: _toggleTheme,

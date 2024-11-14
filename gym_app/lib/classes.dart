@@ -100,7 +100,7 @@ class _ClassesPageState extends State<ClassesPage> {
                                 Text(
                                   item["text"]!,
                                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                    fontSize: 16,
+                                    fontSize: 18,
                                     color: Colors.white,
                                   ),
                                   textAlign: TextAlign.center,

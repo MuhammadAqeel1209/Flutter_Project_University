@@ -8,13 +8,12 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
+        body: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  height: 450,
+                  height: 400,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
@@ -59,10 +58,13 @@ class Home extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 16),
-                        Text(
-                          "Best Gym & Fitness Center\nBuild Your Health & Ultimate Fitness Solution",
-                          style: Theme.of(context).textTheme.bodyLarge,
-                          textAlign: TextAlign.center,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            "Best Gym & Fitness Center\nBuild Your Health & Ultimate Fitness Solution",
+                            style: Theme.of(context).textTheme.bodyLarge,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ],
                   ),
@@ -96,7 +98,6 @@ class Home extends StatelessWidget {
               ),
             ],
           ),
-        ),
       ),
     );
   }

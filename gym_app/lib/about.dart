@@ -13,7 +13,7 @@ class About extends StatelessWidget {
           'Our award-winning trainers provide personalized coaching, optimizing every aspect of your fitness journey. Benefit from their expertise and customized workout plans designed for your goals and abilities.',
     },
     {
-      'icon': FontAwesomeIcons.running,
+      'icon': FontAwesomeIcons.personRunning,
       'title': 'Personalized Running Coaching',
       'subtitle':
           "Certified running coaches help you achieve your running goals, whether you're a beginner or seasoned runner. Our experts tailor training plans to suit your needs, ensuring optimal performance and injury prevention.",

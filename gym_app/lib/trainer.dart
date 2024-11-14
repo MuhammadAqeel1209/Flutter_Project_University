@@ -81,7 +81,9 @@ class _TrainersPageState extends State<TrainersPage> {
                           ),
                           Text(
                             item["role"]!,
-                            style: Theme.of(context).textTheme.bodyMedium,
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontSize: 18
+                            ),
                             textAlign: TextAlign.center,
                           ),
                         ],
