@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:gym_app/slider.dart';
+
 class BMICalculator extends StatefulWidget {
   const BMICalculator({super.key});
 
@@ -56,47 +58,26 @@ class _BMICalculatorState extends State<BMICalculator> {
                 const SizedBox(height: 20),
                 const Divider(),
                 const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Height (cm):',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    Text(
-                      height.toStringAsFixed(0),
-                      style: Theme.of(context).textTheme.headlineSmall),
-                  ],
-                ),
-                Slider(
-                  value: height,
+
+                SliderInput(
+                  percentage: height,
+                  symbol: "cm",
                   min: 50,
                   max: 250,
-                  divisions: 200,
-                  label: height.toStringAsFixed(0),
+                  division: 200,
+                  label: "Height",
                   onChanged: (value) => setState(() => height = value),
                   activeColor: Colors.blueAccent,
                   inactiveColor: Colors.blueAccent.withOpacity(0.3),
                 ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Weight (kg):',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    Text(
-                      weight.toStringAsFixed(0),
-                      style: Theme.of(context).textTheme.headlineSmall),
-                  ],
-                ),
-                Slider(
-                  value: weight,
+
+                SliderInput(
+                  percentage: weight,
+                  symbol: 'kg',
                   min: 30,
                   max: 150,
-                  divisions: 120,
-                  label: weight.toStringAsFixed(0),
+                  division: 120,
+                  label: "Weight",
                   onChanged: (value) => setState(() => weight = value),
                   activeColor: Colors.blueAccent,
                   inactiveColor: Colors.blueAccent.withOpacity(0.3),
@@ -111,7 +92,7 @@ class _BMICalculatorState extends State<BMICalculator> {
                     ),
                   ),
                   child:  Text("Calculate BMI", style:Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.blue),
-                ),
+                  ),
                 ),
                 const SizedBox(height: 20),
                 if (result.isNotEmpty)

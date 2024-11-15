@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/text_field.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
@@ -63,110 +64,76 @@ _priceController.text = _price ?? " ";
                       style: Theme.of(context).textTheme.displayLarge,
                   textAlign: TextAlign.center,),
                   const SizedBox(height: 16),
-                  TextFormField(
+                  TextFieldInput(
                     controller: _nameController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Your Name',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
-                      prefixIcon: const Icon(Icons.person_3, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                    keyboardType: TextInputType.text
+                    hintText: "Enter Your Name",
+                    obscureText: false,
+                    prefixIcon: Icons.person,
+                    fillColor: Colors.black,
+                    keyboardType: TextInputType.text,
                   ),
                   const SizedBox(height: 16),
-                  TextFormField(
+                  TextFieldInput(
                     controller: _emailController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Your Email',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
-                      prefixIcon: const Icon(Icons.email, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                    hintText: "Enter Your Email",
+                    obscureText: false,
+                    prefixIcon: Icons.mail,
+                    fillColor: Colors.black,
                     keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(height: 16),
-                  TextFormField(
+                  TextFieldInput(
                     controller: _phoneController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Your Phone Number',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
-                      prefixIcon: const Icon(Icons.phone, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                    keyboardType: TextInputType.number
+                    hintText: "Enter Your Phone Number",
+                    obscureText: false,
+                    prefixIcon: Icons.phone,
+                    fillColor: Colors.black,
+                    keyboardType: TextInputType.phone,
                   ),
                   const SizedBox(height: 16),
-                  DropdownButtonFormField<String>(
+                  DropdownInput(
                     value: _gender,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Your Gender',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
-                      prefixIcon: const Icon(Icons.person, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                    items: ['Male', 'Female'].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
+                    prefixIcon: Icons.person,
+                    hintText: 'Select the Gender',
+                    items:const  ['Male','Female'],
                     onChanged: (value) {
-                      setState(() {
+                      if (value != null) {
                         _gender = value;
-                      });
+                      }
                     },
-                    validator: (value) => value == null ? 'Please select a gender' : null,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please select a Gender';
+                      }
+                      return null;
+                    },
                   ),
+
                   const SizedBox(height: 16),
-                  DropdownButtonFormField<String>(
+                  DropdownInput(
                     value: _packageType,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Your Package',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
-                      prefixIcon: const Icon(Icons.shopping_cart, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                    items: ['Standard', 'Ultimate', 'Professional'].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      if (value != null) _updatePrice(value);
+                    prefixIcon: Icons.shopping_cart,
+                    hintText: 'Select the Package',
+                    items: const ['Standard', 'Ultimate', 'Professional'], onChanged: (value) {
+                      if (value != null) {
+                        _updatePrice(value);
+                      }
                     },
-                    validator: (value) => value == null ? 'Please select a Package' : null,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please select a Package';
+                      }
+                      return null;
+                    },
                   ),
+
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: _priceController,
                     decoration: InputDecoration(
                       hintText: 'Enter Your Price',
                       filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
+                      fillColor: Colors.black.withOpacity(0.3),
                       prefixIcon: const Icon(Icons.price_check, color: Colors.white),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20.0),
@@ -175,24 +142,16 @@ _priceController.text = _price ?? " ";
                     ),
                     readOnly: true,
                     validator: (value) => value == null || value.isEmpty ?'Plase Select a Packge' : null,
-      
-      
                   ),
                   const SizedBox(height: 16),
-      
-                  TextFormField(
+
+                  TextFieldInput(
                     controller: _messageController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Your Message',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
-                      prefixIcon: const Icon(Icons.message, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                    hintText: "Enter Your Message",
+                    obscureText: false,
+                    prefixIcon: Icons.message,
+                    fillColor: Colors.black,
+                    keyboardType: TextInputType.multiline,
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/text_field.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -10,7 +11,6 @@ class Signup extends StatefulWidget {
 class _SignupSate extends State<Signup> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _ageController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -38,80 +38,40 @@ class _SignupSate extends State<Signup> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16),
-                  TextField(
+                  TextFieldInput(
                     controller: _firstNameController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'First Name',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
-                      prefixIcon: const Icon(Icons.person, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                    hintText: "Enter Your First Name",
+                    obscureText: false,
+                    prefixIcon: Icons.person,
+                    fillColor: Colors.black,
+                    keyboardType: TextInputType.text,
                   ),
                   const SizedBox(height: 16),
-                  TextField(
+                  TextFieldInput(
                     controller: _lastNameController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Last Name',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
-                      prefixIcon: const Icon(Icons.person, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                    hintText: "Enter Your Last Name",
+                    obscureText: false,
+                    prefixIcon: Icons.person,
+                    fillColor: Colors.black,
+                    keyboardType: TextInputType.text,
                   ),
                   const SizedBox(height: 16),
-                  TextField(
-                    controller: _ageController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Age',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
-                      prefixIcon:
-                          const Icon(Icons.calendar_today, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  TextField(
+                  TextFieldInput(
                     controller: _emailController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Email',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
-                      prefixIcon: const Icon(Icons.email, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                    hintText: "Enter Your Email",
+                    obscureText: false,
+                    prefixIcon: Icons.mail,
+                    fillColor: Colors.black,
+                    keyboardType: TextInputType.text,
                   ),
                   const SizedBox(height: 16),
-                  TextField(
-                    controller: _passwordController,
+                  TextFieldInput(
+                    controller:_passwordController,
+                    hintText: "Enter Your Password",
                     obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
-                      prefixIcon: const Icon(Icons.lock, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                    prefixIcon: Icons.password,
+                    fillColor: Colors.black,
+                    keyboardType: TextInputType.text,
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(

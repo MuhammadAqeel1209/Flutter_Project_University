@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/signup.dart';
 import 'package:gym_app/calculations.dart';
+import 'package:gym_app/text_field.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -35,34 +36,22 @@ class _LoginState extends State<Login> {
                   Text("Welcome back",
                       style: Theme.of(context).textTheme.displayLarge),
                   const SizedBox(height: 16),
-                  TextField(
+                  TextFieldInput(
                     controller: _emailController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Email',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
-                      prefixIcon: const Icon(Icons.email, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                    hintText: "Enter Your Email",
+                    obscureText: false,
+                    prefixIcon: Icons.mail,
+                    fillColor: Colors.black,
+                    keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(height: 16),
-                  TextField(
+                  TextFieldInput(
                     controller: _passwordController,
+                    hintText: "Enter Your Password",
                     obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.2),
-                      prefixIcon: const Icon(Icons.lock, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                    prefixIcon: Icons.password,
+                    fillColor: Colors.black,
+                    keyboardType: TextInputType.visiblePassword,
                   ),
                   const SizedBox(height: 16),
                   TextButton(

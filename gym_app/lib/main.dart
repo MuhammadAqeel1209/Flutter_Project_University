@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
             color: _isDarkMode ? Colors.white : Colors.black,
           ),
           headlineSmall: TextStyle(
-            fontSize: 20.0,
+            fontSize: 22.0,
             fontWeight: FontWeight.bold,
             color: _isDarkMode ? Colors.white : Colors.black,
           ),
