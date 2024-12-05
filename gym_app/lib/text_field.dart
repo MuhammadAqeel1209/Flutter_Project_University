@@ -26,7 +26,7 @@ class TextFieldInput extends StatefulWidget {
 class _TextFieldInputState extends State<TextFieldInput> {
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: widget.controller,
       obscureText: widget.obscureText,
       keyboardType: widget.keyboardType,

@@ -66,7 +66,7 @@ class _SignupSate extends State<Signup> {
                   ),
                   const SizedBox(height: 16),
                   TextFieldInput(
-                    controller:_passwordController,
+                    controller: _passwordController,
                     hintText: "Enter Your Password",
                     obscureText: true,
                     prefixIcon: Icons.password,
@@ -85,12 +85,10 @@ class _SignupSate extends State<Signup> {
                       ),
                     ),
                     child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 48.0,vertical: 15.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 48.0, vertical: 15.0),
                         child: Text("Sign Up",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(color: Colors.blue))),
+                            style: Theme.of(context).textTheme.headlineSmall)),
                   ),
                 ],
               ),

@@ -4,7 +4,7 @@ class ClassesPage extends StatefulWidget {
   const ClassesPage({super.key});
 
   @override
- State<ClassesPage> createState() => _ClassesPageState();
+  State<ClassesPage> createState() => _ClassesPageState();
 }
 
 class _ClassesPageState extends State<ClassesPage> {
@@ -33,6 +33,9 @@ class _ClassesPageState extends State<ClassesPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -49,25 +52,25 @@ class _ClassesPageState extends State<ClassesPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20), // Add space between heading and grid
+              const SizedBox(height: 20), // Space between heading and grid
 
               // GridView for classes
               Expanded(
                 child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 8,
-                    childAspectRatio: 0.75,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: screenWidth > 600 ? 2 : 1,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
+                    childAspectRatio: screenWidth > 600 ? 3 / 2 : 3 / 4,
                   ),
                   itemCount: classes.length,
                   itemBuilder: (context, index) {
                     final item = classes[index];
                     return Stack(
                       children: [
-                        // Background Image
+                        // Responsive Container
                         Container(
-                          height: 400,
+                          height: screenHeight * 0.4, // 40% of screen height
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage(item["img"]!),
@@ -78,6 +81,7 @@ class _ClassesPageState extends State<ClassesPage> {
                         ),
                         // Overlay
                         Container(
+                          height: screenHeight * 0.4, // Match height with parent container
                           decoration: BoxDecoration(
                             color: Colors.black.withOpacity(0.5),
                             borderRadius: BorderRadius.circular(10),
@@ -89,8 +93,7 @@ class _ClassesPageState extends State<ClassesPage> {
                               children: [
                                 Text(
                                   item["name"]!,
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    fontSize: 24,
+                                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                     color: Colors.redAccent,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -100,7 +103,6 @@ class _ClassesPageState extends State<ClassesPage> {
                                 Text(
                                   item["text"]!,
                                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                    fontSize: 18,
                                     color: Colors.white,
                                   ),
                                   textAlign: TextAlign.center,

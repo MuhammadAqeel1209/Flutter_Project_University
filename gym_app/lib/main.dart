@@ -28,47 +28,55 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Roboto',
-        brightness: _isDarkMode ? Brightness.dark : Brightness.light,
-        textTheme: TextTheme(
-          displayLarge: TextStyle(
-            fontSize: 45.0,
-            fontWeight: FontWeight.bold,
-            color: _isDarkMode ? Colors.white : Colors.black,
-          ),
-          bodyLarge: TextStyle(
-            fontSize: 26.0,
-            fontWeight: FontWeight.bold,
-            color: _isDarkMode ? Colors.white70 : Colors.black87,
-          ),
-          bodyMedium: TextStyle(
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
-            color: _isDarkMode ? Colors.white : Colors.black,
-          ),
-          headlineSmall: TextStyle(
-            fontSize: 22.0,
-            fontWeight: FontWeight.bold,
-            color: _isDarkMode ? Colors.white : Colors.black,
-          ),
-        ),
-        appBarTheme: AppBarTheme(
-          backgroundColor: _isDarkMode ? Colors.black : Colors.blueAccent,
-          titleTextStyle:TextStyle(
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-              color: _isDarkMode ? Colors.white : Colors.black,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double screenWidth = constraints.maxWidth;
+
+        // Dynamic font scaling
+        double scaleFactor = screenWidth / 445.0;
+
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            fontFamily: 'Roboto',
+            brightness: _isDarkMode ? Brightness.dark : Brightness.light,
+            textTheme: TextTheme(
+              displayLarge: TextStyle(
+                fontSize: 45.0 * scaleFactor, // Responsive font size
+                fontWeight: FontWeight.bold,
+                color: _isDarkMode ? Colors.white : Colors.black,
+              ),
+              bodyLarge: TextStyle(
+                fontSize: 30.0 * scaleFactor,
+                fontWeight: FontWeight.bold,
+                color: _isDarkMode ? Colors.white70 : Colors.black87,
+              ),
+              bodyMedium: TextStyle(
+                fontSize: 24.0 * scaleFactor,
+                fontWeight: FontWeight.bold,
+                color: _isDarkMode ? Colors.white : Colors.black,
+              ),
+              headlineSmall: TextStyle(
+                fontSize: 18.0 * scaleFactor,
+                fontWeight: FontWeight.bold,
+                color: _isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
+            appBarTheme: AppBarTheme(
+              backgroundColor: _isDarkMode ? Colors.black : Colors.blueAccent,
+              titleTextStyle: TextStyle(
+                fontSize: 30.0 * scaleFactor,
+                fontWeight: FontWeight.bold,
+                color: _isDarkMode ? Colors.white : Colors.black,
+              ),
             ),
           ),
-        ),
-
-      home: MyHomePage(
-        isDarkMode: _isDarkMode,
-        toggleTheme: _toggleTheme,
-      ),
+          home: MyHomePage(
+            isDarkMode: _isDarkMode,
+            toggleTheme: _toggleTheme,
+          ),
+        );
+      },
     );
   }
 }
@@ -97,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _currentScreen = const Home();
           break;
         case 'About':
-          _currentScreen =  About();
+          _currentScreen = About();
           break;
         case 'Trainer':
           _currentScreen = const TrainersPage();
@@ -105,8 +113,8 @@ class _MyHomePageState extends State<MyHomePage> {
         case 'Classes':
           _currentScreen = const ClassesPage();
           break;
-        case 'MemberShip' :
-          _currentScreen =  const MembershipPage();
+        case 'MemberShip':
+          _currentScreen = const MembershipPage();
       }
     });
   }
@@ -118,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: CustomAppBar(
           isDarkMode: widget.isDarkMode,
           toggleTheme: widget.toggleTheme,
-          menuItems: const ['Home', 'About','Trainer','Classes','MemberShip'],
+          menuItems: const ['Home', 'About', 'Trainer', 'Classes', 'MemberShip'],
           onMenuItemSelected: _onMenuItemSelected,
         ),
         body: _currentScreen,

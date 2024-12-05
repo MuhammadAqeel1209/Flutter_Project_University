@@ -78,8 +78,8 @@ class _LoginState extends State<Login> {
                         child: Text("Login",
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyMedium
-                                ?.copyWith(color: Colors.blue))),
+                                .headlineSmall
+                                )),
                   ),
                   const SizedBox(height: 24),
                   TextButton(

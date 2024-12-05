@@ -54,13 +54,6 @@ class About extends StatelessWidget {
                         ),
                   ),
                 ),
-                const SizedBox(height: 12),
-                Text(
-                  "Step into our expansive gym and immerse yourself in a world of fitness excellence. Our facility boasts a wide array of cutting-edge equipment and spacious workout areas to accommodate every exercise imaginable. With expert trainers on hand to provide guidance and motivation, you'll feel empowered to push your limits and achieve your fitness aspirations. Join our vibrant community today and experience the transformative power of our premier fitness facility.",
-                  style: GoogleFonts.lato(
-                    textStyle: Theme.of(context).textTheme.bodyMedium
-                    )
-                  ),
                 const SizedBox(height: 24),
                 // Featured Section
                 Expanded(

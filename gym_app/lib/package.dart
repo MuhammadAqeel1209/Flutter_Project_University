@@ -92,7 +92,9 @@ class _MembershipPageState extends State<MembershipPage> {
                     margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.grey[800]
+                          : Colors.black,
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: Colors.redAccent),
                     ),
@@ -101,9 +103,7 @@ class _MembershipPageState extends State<MembershipPage> {
                       children: [
                         Text(
                           membership["title"],
-                          style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                            color: Colors.white,
-                          ),
+                          style: Theme.of(context).textTheme.displayLarge,
                         ),
                         const SizedBox(height: 10),
                         Text(
@@ -143,7 +143,7 @@ class _MembershipPageState extends State<MembershipPage> {
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(200, 50),  ),
                           onPressed: () {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => RegistrationPage()));
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => const RegistrationPage()));
                           },
                           child: Text(
                             "Buy Now",
