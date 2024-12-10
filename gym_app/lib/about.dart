@@ -48,10 +48,7 @@ class About extends StatelessWidget {
                 Center(
                   child: Text(
                     'About Us',
-                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                          color: Colors.orange,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    style: Theme.of(context).textTheme.displayLarge
                   ),
                 ),
                 const SizedBox(height: 24),

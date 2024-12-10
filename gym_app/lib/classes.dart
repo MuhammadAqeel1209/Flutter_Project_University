@@ -46,10 +46,7 @@ class _ClassesPageState extends State<ClassesPage> {
               Center(
                 child: Text(
                   "Classes",
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    color: Colors.orange,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context).textTheme.displayLarge
                 ),
               ),
               const SizedBox(height: 20), // Space between heading and grid

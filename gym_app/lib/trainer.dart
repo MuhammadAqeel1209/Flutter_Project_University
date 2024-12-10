@@ -45,9 +45,8 @@ class _TrainersPageState extends State<TrainersPage> {
               Center(
                 child: Text(
                   "Our Trainers",
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    color: Colors.orange,
-                    fontWeight: FontWeight.bold,
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                    // color: Colors.orange,
                   ),
                 ),
               ),
@@ -77,6 +76,7 @@ class _TrainersPageState extends State<TrainersPage> {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 6,),
                         Flexible(
                           child: Text(
                             trainerData[index]["name"]!,
@@ -86,12 +86,11 @@ class _TrainersPageState extends State<TrainersPage> {
                             textAlign: TextAlign.center,
                           ),
                         ),
+                        const SizedBox(height: 6,),
                         Flexible(
                           child: Text(
                             trainerData[index]["role"]!,
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontSize: 16,
-                            ),
+                            style: Theme.of(context).textTheme.bodyMedium,
                             textAlign: TextAlign.center,
                           ),
                         ),

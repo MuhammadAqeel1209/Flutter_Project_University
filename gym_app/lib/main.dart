@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
               displayLarge: TextStyle(
                 fontSize: 45.0 * scaleFactor, // Responsive font size
                 fontWeight: FontWeight.bold,
-                color: _isDarkMode ? Colors.white : Colors.black,
+                color: _isDarkMode ?  Colors.orange : Colors.black,
               ),
               bodyLarge: TextStyle(
                 fontSize: 30.0 * scaleFactor,
@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             appBarTheme: AppBarTheme(
-              backgroundColor: _isDarkMode ? Colors.black : Colors.blueAccent,
+              backgroundColor: _isDarkMode ? Colors.orangeAccent : Colors.blueAccent,
               titleTextStyle: TextStyle(
                 fontSize: 30.0 * scaleFactor,
                 fontWeight: FontWeight.bold,

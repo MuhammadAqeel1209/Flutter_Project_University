@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/registration.dart';
+import 'package:gym_app/button.dart';
 
 class MembershipPage extends StatefulWidget {
   const MembershipPage({super.key});
@@ -73,10 +74,7 @@ class _MembershipPageState extends State<MembershipPage> {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 "Membership Card",
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                  color: Colors.orange,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.displayLarge,
               ),
             ),
             Expanded(
@@ -131,6 +129,7 @@ class _MembershipPageState extends State<MembershipPage> {
                                     benefit["text"],
                                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                                       color: Colors.white,
+                                      fontSize: 20
                                     ),
                                   ),
                                 ],
@@ -139,17 +138,18 @@ class _MembershipPageState extends State<MembershipPage> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(200, 50),  ),
+                        CustomButton(
+                          text: "Buy Now",
                           onPressed: () {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => const RegistrationPage()));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const RegistrationPage(),
+                              ),
+                            );
                           },
-                          child: Text(
-                            "Buy Now",
-                            style: Theme.of(context).textTheme.bodyMedium
-                          ),
                         ),
+
                       ],
                     ),
                   );

@@ -45,8 +45,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     borderRadius: BorderRadius.circular(12),
                     image: const DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(
-                        "https://cdn.pixabay.com/photo/2016/03/27/07/08/man-1282232_1280.jpg",
+                      image: AssetImage(
+                        "assets/img/hero/bg.jpg",
                       ),
                     ),
                   ),
