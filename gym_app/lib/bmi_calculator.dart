@@ -3,6 +3,8 @@ import 'dart:math';
 
 import 'package:gym_app/slider.dart';
 
+import 'button.dart';
+
 class BMICalculator extends StatefulWidget {
   const BMICalculator({super.key});
 
@@ -83,17 +85,12 @@ class _BMICalculatorState extends State<BMICalculator> {
                   inactiveColor: Colors.blueAccent.withOpacity(0.3),
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: calculateBMI,
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child:  Text("Calculate BMI", style:Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.blue),
-                  ),
+                CustomButton(
+                  text: "Calculate BMI",
+                  size: Theme.of(context).textTheme.headlineSmall!,
+                  onPressed: calculateBMI
                 ),
+
                 const SizedBox(height: 20),
                 if (result.isNotEmpty)
                   Text(

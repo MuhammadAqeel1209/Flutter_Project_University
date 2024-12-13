@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/text_field.dart';
 
+import 'button.dart';
+
 class WaterIntakeCalculator extends StatefulWidget {
   const WaterIntakeCalculator({super.key});
 
@@ -64,24 +66,19 @@ class _WaterIntakeCalculatorState extends State<WaterIntakeCalculator> {
                 const SizedBox(height: 20),
                 TextFieldInput(
                   controller:activityController,
-                  hintText: "Enter Your Activity level(hrs/day)",
+                  hintText: "Enter Your Activity level",
                   obscureText: false,
                   prefixIcon: Icons.fitness_center,
                   fillColor: Colors.black,
                   keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: calculateWaterIntake,
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                  ),
-                  child: Text(
-                    "Calculate Water Intake",
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.blue),
-                  ),
+                CustomButton(
+                    text: "Calculate Water Intake",
+                    size: Theme.of(context).textTheme.headlineSmall!,
+                    onPressed: calculateWaterIntake
                 ),
+
                 const SizedBox(height: 20),
                 if (waterIntake != null)
                   Text(

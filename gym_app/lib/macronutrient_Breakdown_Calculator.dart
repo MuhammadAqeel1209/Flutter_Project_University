@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gym_app/slider.dart';
 
@@ -5,7 +6,8 @@ class MacronutrientCalculator extends StatefulWidget {
   const MacronutrientCalculator({super.key});
 
   @override
-  _MacronutrientCalculatorState createState() => _MacronutrientCalculatorState();
+  _MacronutrientCalculatorState createState() =>
+      _MacronutrientCalculatorState();
 }
 
 class _MacronutrientCalculatorState extends State<MacronutrientCalculator> {
@@ -30,6 +32,30 @@ class _MacronutrientCalculatorState extends State<MacronutrientCalculator> {
         breakdown["Carbs"] = calories * carbPercentage / 100;
       });
     }
+  }
+
+  void updatePercentages(double value, String type) {
+    setState(() {
+      if (type == "Protein") {
+        proteinPercentage = value;
+      } else if (type == "Fats") {
+        fatPercentage = value;
+      }
+
+      // Recalculate Carbs percentage
+      carbPercentage = max(0, 100 - proteinPercentage - fatPercentage);
+
+      // Adjust protein and fat to ensure sum is within range
+      if (proteinPercentage + fatPercentage > 100) {
+        if (type == "Protein") {
+          fatPercentage = max(0, 100 - proteinPercentage);
+        } else if (type == "Fats") {
+          proteinPercentage = max(0, 100 - fatPercentage);
+        }
+      }
+
+      calculateBreakdown();
+    });
   }
 
   @override
@@ -63,7 +89,8 @@ class _MacronutrientCalculatorState extends State<MacronutrientCalculator> {
                     hintText: 'Enter Daily Caloric Requirement:',
                     filled: true,
                     fillColor: Colors.black.withOpacity(0.3),
-                    prefixIcon: const Icon(Icons.local_fire_department, color: Colors.white),
+                    prefixIcon:
+                    const Icon(Icons.local_fire_department, color: Colors.white),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20.0),
                       borderSide: BorderSide.none,
@@ -79,13 +106,7 @@ class _MacronutrientCalculatorState extends State<MacronutrientCalculator> {
                   min: 0,
                   max: 100,
                   division: 100,
-                  onChanged: (value) {
-                    setState(() {
-                      proteinPercentage = value;
-                      carbPercentage = 100 - proteinPercentage - fatPercentage;
-                      calculateBreakdown();
-                    });
-                  },
+                  onChanged: (value) => updatePercentages(value, "Protein"),
                   activeColor: Colors.blueAccent,
                   inactiveColor: Colors.blueAccent.withOpacity(0.3),
                 ),
@@ -96,23 +117,18 @@ class _MacronutrientCalculatorState extends State<MacronutrientCalculator> {
                   min: 0,
                   max: 100,
                   division: 100,
-                  onChanged: (value) {
-                    setState(() {
-                      fatPercentage = value;
-                      carbPercentage = 100 - proteinPercentage - fatPercentage;
-                      calculateBreakdown();
-                    });
-                  },
+                  onChanged: (value) => updatePercentages(value, "Fats"),
                   activeColor: Colors.blueAccent,
                   inactiveColor: Colors.blueAccent.withOpacity(0.3),
                 ),
                 SliderInput(
                   label: "Carbs",
                   symbol: "%",
-                  percentage: carbPercentage,   min: 0,
+                  percentage: carbPercentage,
+                  min: 0,
                   max: 100,
                   division: 100,
-                  onChanged: null,
+                  onChanged: null, // Disabled, derived automatically
                   activeColor: Colors.blueAccent,
                   inactiveColor: Colors.blueAccent.withOpacity(0.3),
                 ),
@@ -142,5 +158,3 @@ class _MacronutrientCalculatorState extends State<MacronutrientCalculator> {
     );
   }
 }
-
-

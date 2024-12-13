@@ -45,9 +45,7 @@ class _TrainersPageState extends State<TrainersPage> {
               Center(
                 child: Text(
                   "Our Trainers",
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                    // color: Colors.orange,
-                  ),
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(),
                 ),
               ),
               const SizedBox(height: 16),
@@ -61,40 +59,39 @@ class _TrainersPageState extends State<TrainersPage> {
                   ),
                   itemCount: trainerData.length,
                   itemBuilder: (context, index) {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min, // Prevents overflow
-                      children: [
-                        Container(
-                          height: screenWidth > 600 ? 220 : 180,
-                          width: screenWidth > 600 ? 220 : 180,
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              image: AssetImage(trainerData[index]["img"]!),
-                              fit: BoxFit.cover,
+                    return SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            height: screenWidth > 600 ? 220 : 180,
+                            width: screenWidth > 600 ? 220 : 180,
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                image: AssetImage(trainerData[index]["img"]!),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 6,),
-                        Flexible(
-                          child: Text(
+                          const SizedBox(height: 6),
+                          Text(
                             trainerData[index]["name"]!,
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.copyWith(fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
-                        ),
-                        const SizedBox(height: 6,),
-                        Flexible(
-                          child: Text(
+                          const SizedBox(height: 6),
+                          Text(
                             trainerData[index]["role"]!,
                             style: Theme.of(context).textTheme.bodyMedium,
                             textAlign: TextAlign.center,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     );
                   },
                 ),

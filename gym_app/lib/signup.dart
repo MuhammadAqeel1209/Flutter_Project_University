@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/text_field.dart';
 
+import 'button.dart';
+
 class Signup extends StatefulWidget {
   const Signup({super.key});
 
@@ -74,21 +76,13 @@ class _SignupSate extends State<Signup> {
                     keyboardType: TextInputType.text,
                   ),
                   const SizedBox(height: 16),
-                  ElevatedButton(
+
+                  CustomButton(
+                    text: "Sign Up",
+                    size: Theme.of(context).textTheme.bodyMedium!,
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.blue, // Button color
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 48.0, vertical: 15.0),
-                        child: Text("Sign Up",
-                            style: Theme.of(context).textTheme.headlineSmall)),
                   ),
                 ],
               ),

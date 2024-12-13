@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/text_field.dart';
+import 'button.dart';
 
 class IBWCalculator extends StatefulWidget {
   const IBWCalculator({super.key});
@@ -10,12 +11,24 @@ class IBWCalculator extends StatefulWidget {
 
 class _IBWCalculatorState extends State<IBWCalculator> {
   final TextEditingController heightController = TextEditingController();
-  String gender = 'male';
+  String? gender;
   double? ibw;
 
   void calculateIBW() {
     double heightCm = double.tryParse(heightController.text) ?? 0;
 
+    // Check if gender is selected
+    if (gender == null || gender!.isEmpty) {
+      setState(() {
+        ibw = null;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select a gender.')),
+      );
+      return;
+    }
+
+    // Check if height is valid
     if (heightCm <= 0) {
       setState(() {
         ibw = null;
@@ -23,14 +36,12 @@ class _IBWCalculatorState extends State<IBWCalculator> {
       return;
     }
 
+    // Perform IBW calculation
     setState(() {
-      if (gender == 'male') {
-        // Using metric formula for males
-        double heightInMeters = heightCm / 100;
+      double heightInMeters = heightCm / 100;
+      if (gender == 'Male') {
         ibw = 22 * (heightInMeters * heightInMeters);
       } else {
-        // Using metric formula for females
-        double heightInMeters = heightCm / 100;
         ibw = 21 * (heightInMeters * heightInMeters);
       }
     });
@@ -69,41 +80,24 @@ class _IBWCalculatorState extends State<IBWCalculator> {
                   keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          gender = 'male';
-                        });
-                      },
-                      child: Text("Male",style: Theme.of(context).textTheme.headlineSmall
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          gender = 'female';
-                        });
-                      },
-                      child:  Text("Female",style: Theme.of(context).textTheme.headlineSmall
-                      ),
-                    ),
-                  ],
+                DropdownInput(
+                  value: gender,
+                  prefixIcon: Icons.person,
+                  hintText: 'Select Gender',
+                  items: const ['Male', 'Female'],
+                  onChanged: (value) {
+                    setState(() {
+                      gender = value;
+                    });
+                  },
+                  validator: (value) =>
+                  value == null ? 'Please select a gender' : null,
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
+                CustomButton(
+                  text: "Calculate IBW",
+                  size: Theme.of(context).textTheme.headlineSmall!,
                   onPressed: calculateIBW,
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                  ),
-                  child: Text(
-                    "Calculate IBW",
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.blue),
-                  ),
                 ),
                 const SizedBox(height: 20),
                 if (ibw != null)

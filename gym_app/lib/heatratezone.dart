@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gym_app/text_field.dart';
+
+import 'button.dart';
 class HeartRateZoneCalculator extends StatefulWidget {
   const HeartRateZoneCalculator({super.key});
 
@@ -82,21 +84,10 @@ class _HeartRateZoneCalculatorState extends State<HeartRateZoneCalculator> {
                   keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: calculateHeartRateZones,
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: Text(
-                    "Calculate Heart Rate",
-                    style: Theme.of(context)
-                        .textTheme.headlineSmall
-                        ?.copyWith(color: Colors.blue),
-                  ),
+                CustomButton(
+                    text: "Calculate Heart Rate",
+                    size: Theme.of(context).textTheme.headlineSmall!,
+                    onPressed: calculateHeartRateZones
                 ),
                 const SizedBox(height: 20),
                 if (mhr != null)

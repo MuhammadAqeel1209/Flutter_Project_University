@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/slider.dart';
 
+import 'button.dart';
+
 class CalorieRequirementCalculator extends StatefulWidget {
   const CalorieRequirementCalculator({super.key});
 
@@ -35,7 +37,8 @@ class _CalorieRequirementCalculatorState
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           elevation: 8,
           child: Padding(
             padding: const EdgeInsets.all(24.0),
@@ -46,9 +49,9 @@ class _CalorieRequirementCalculatorState
                   textAlign: TextAlign.center,
                   "Calorie Requirement Calculator",
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Colors.blueAccent,
-                    fontWeight: FontWeight.bold,
-                  ),
+                        color: Colors.blueAccent,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 const SizedBox(height: 20),
                 const Divider(),
@@ -106,42 +109,32 @@ class _CalorieRequirementCalculatorState
                   inactiveColor: Colors.blueAccent.withOpacity(0.3),
                 ),
                 const SizedBox(height: 20),
-
                 // Male Button
-                ElevatedButton(
+
+                CustomButton(
+                  text: "Male - Moderate",
+                  size: Theme.of(context).textTheme.headlineSmall!,
                   onPressed: () => calculateCalories('male', 1.55),
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    "Male - Moderate",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall
-                        ?.copyWith(color: Colors.blue),
-                  ),
                 ),
                 const SizedBox(height: 12),
 
                 // Female Button
-                ElevatedButton(
+                CustomButton(
+                  text: "Female - Moderate",
+                  size: Theme.of(context).textTheme.headlineSmall!,
                   onPressed: () => calculateCalories('female', 1.55),
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    "Female - Moderate",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall
-                        ?.copyWith(color: Colors.blue),
-                  ),
                 ),
+
                 const SizedBox(height: 12),
 
                 // Display Calorie Requirement
                 if (calorieRequirement != null)
                   Text(
                     "Calorie Requirement: ${calorieRequirement!.toStringAsFixed(2)}",
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Colors.blue
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(color: Colors.blue),
                   ),
               ],
             ),

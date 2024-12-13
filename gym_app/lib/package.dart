@@ -140,6 +140,7 @@ class _MembershipPageState extends State<MembershipPage> {
                         const SizedBox(height: 10),
                         CustomButton(
                           text: "Buy Now",
+                          size: Theme.of(context).textTheme.bodyMedium!,
                           onPressed: () {
                             Navigator.push(
                               context,

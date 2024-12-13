@@ -3,6 +3,8 @@ import 'package:gym_app/signup.dart';
 import 'package:gym_app/calculations.dart';
 import 'package:gym_app/text_field.dart';
 
+import 'button.dart';
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -13,7 +15,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -63,28 +64,23 @@ class _LoginState extends State<Login> {
                             ?.copyWith(color: Colors.white)),
                   ),
                   const SizedBox(height: 16),
-                  ElevatedButton(
+                  CustomButton(
+                    text: "Login",
+                    size: Theme.of(context).textTheme.bodyMedium!,
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const Calculations()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Calculations()));
                     },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.blue, // Button color
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 48.0,vertical: 15.0),
-                        child: Text("Login",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall
-                                )),
                   ),
                   const SizedBox(height: 24),
                   TextButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder:(context) => const Signup()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Signup()));
                       },
                       child: Text(
                         "Don't have an Account? Sign Up",
