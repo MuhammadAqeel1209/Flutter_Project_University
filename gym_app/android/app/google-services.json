@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "79597551109",
+    "project_id": "fitnessappuniversity",
+    "storage_bucket": "fitnessappuniversity.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79597551109:android:97ad882fe13c891841266c",
+        "android_client_info": {
+          "package_name": "com.example.gym_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdXcxsrKkPm1rEEA4_O6FPN-M7Lmy0XlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
