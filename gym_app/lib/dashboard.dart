@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:gym_app/auth_service.dart';
 import 'package:gym_app/database.dart';
+
+import 'button.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -10,6 +13,14 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   final database = DataBaseService();
+final auth = AuthService();
+  void _logout() {
+    auth.signOut(context);
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Logged out successfully!")),
+    );
+  }
 
   // Delete user function
   void deletedUser(String tableName, String uid) async {
@@ -80,7 +91,7 @@ class _DashboardState extends State<Dashboard> {
       builder: (context) {
         TextEditingController nameController = TextEditingController(text: data['name']);
         TextEditingController emailController = TextEditingController(text: data['email']);
-        bool isMale = data['gender'] == 'Male'; // Assuming data['gender'] holds 'Male' or 'Female'
+        String selectedGender = data['gender'] ?? 'Male'; // Default to 'Male'
         TextEditingController phoneController = TextEditingController(text: data['phone']);
 
         return AlertDialog(
@@ -97,13 +108,16 @@ class _DashboardState extends State<Dashboard> {
                   controller: emailController,
                   decoration: const InputDecoration(labelText: "Email"),
                 ),
-                SwitchListTile(
-                  title: const Text("Gender"),
-                  subtitle: Text(isMale ? "Male" : "Female"),
-                  value: isMale,
-                  onChanged: (bool value) {
+                DropdownButtonFormField<String>(
+                  value: selectedGender,
+                  decoration: const InputDecoration(labelText: "Gender"),
+                  items: const [
+                    DropdownMenuItem(value: 'Male', child: Text('Male')),
+                    DropdownMenuItem(value: 'Female', child: Text('Female')),
+                  ],
+                  onChanged: (String? newValue) {
                     setState(() {
-                      isMale = value; // Toggle between Male and Female
+                      selectedGender = newValue!;
                     });
                   },
                 ),
@@ -126,7 +140,7 @@ class _DashboardState extends State<Dashboard> {
                 database.updateUsers(context, tableName, id, {
                   "name": nameController.text,
                   "email": emailController.text,
-                  "gender": isMale ? 'Male' : 'Female', // Update gender as Male or Female
+                  "gender": selectedGender, // Save the selected gender
                   "phone": phoneController.text,
                 });
                 Navigator.pop(context);
@@ -296,6 +310,14 @@ class _DashboardState extends State<Dashboard> {
                           },
                         );
                       },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: CustomButton(
+                      text: "Log Out",
+                      size: Theme.of(context).textTheme.bodyMedium!,
+                      onPressed: _logout,
                     ),
                   ),
                 ],
