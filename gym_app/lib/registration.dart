@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/auth_service.dart';
 import 'package:gym_app/database.dart';
 import 'package:gym_app/text_field.dart';
 import 'dart:math';
@@ -82,7 +81,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         Navigator.pop(context); // Navigate back to the previous screen
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("An error occurred: $e")),
+          const SnackBar(content: Text("")),
         );
       }
     }
@@ -134,7 +133,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(height: 16),
-                  
+
                     TextFieldInput(
                       controller: _phoneController,
                       hintText: "Enter Your Phone Number",

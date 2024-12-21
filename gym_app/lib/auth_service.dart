@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class AuthService {
   final _auth = FirebaseAuth.instance;
 
-  /// Helper function to validate if a password is alphanumeric
   bool _isAlphanumeric(String password) {
     final alphanumericRegex = RegExp(r'^[a-zA-Z0-9]+$');
     return alphanumericRegex.hasMatch(password);
@@ -25,10 +24,6 @@ class AuthService {
       final userCreate = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('User created successfully!')),
-      );
-
       return userCreate.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -39,30 +34,20 @@ class AuthService {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('The email is already in use.')),
         );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: ${e.message}')),
-        );
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('An unexpected error occurred: $e')),
+        const SnackBar(content: Text('')),
       );
     }
     return null;
   }
 
-  /// Log in an existing user with email and password
   Future<User?> logInUserWithEmailAndPassword(
       BuildContext context, String email, String password) async {
     try {
       final userLogin = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('User logged in successfully!')),
-      );
-
       return userLogin.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -73,14 +58,10 @@ class AuthService {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Incorrect password.')),
         );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: ${e.message}')),
-        );
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('An unexpected error occurred: $e')),
+        const SnackBar(content: Text('')),
       );
     }
     return null;
@@ -95,7 +76,7 @@ class AuthService {
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Sign out failed. Please try again. Error: $e')),
+        const SnackBar(content: Text('Sign out failed. Please try again. Error: ')),
       );
     }
   }

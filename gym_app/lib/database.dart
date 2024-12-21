@@ -8,11 +8,9 @@ class DataBaseService {
       Map<String, dynamic> userData) async {
     try {
       await _database.collection('users').doc(uid).set(userData);
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("User added successfully")));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to add user. Error: $e')),
+       const SnackBar(content: Text('')),
       );
     }
   }
@@ -21,9 +19,8 @@ class DataBaseService {
       Map<String, dynamic> userData) async {
     try {
       await _database.collection("register").doc(uid).set(userData);
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("User Register successfully")));
     }
+
     catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to Register user. Error: $e')),
@@ -31,3 +28,4 @@ class DataBaseService {
     }
   }
 }
+

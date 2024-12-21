@@ -33,7 +33,7 @@ class _LoginState extends State<Login> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const Calculations()));
+              builder: (context) => Calculations(uid: user.uid)));
     }
     else {
       ScaffoldMessenger.of(context).showSnackBar(
