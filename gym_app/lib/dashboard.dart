@@ -73,19 +73,15 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  // Update register function for 'register' collection
+
   void updatedRegister(String tableName, String id, Map<String, dynamic> data) {
     showDialog(
       context: context,
       builder: (context) {
-        TextEditingController nameController =
-        TextEditingController(text: data['name']);
-        TextEditingController emailController =
-        TextEditingController(text: data['email']);
-        TextEditingController genderController =
-        TextEditingController(text: data['gender']);
-        TextEditingController phoneController =
-        TextEditingController(text: data['phone']);
+        TextEditingController nameController = TextEditingController(text: data['name']);
+        TextEditingController emailController = TextEditingController(text: data['email']);
+        bool isMale = data['gender'] == 'Male'; // Assuming data['gender'] holds 'Male' or 'Female'
+        TextEditingController phoneController = TextEditingController(text: data['phone']);
 
         return AlertDialog(
           title: const Text("Edit Registration"),
@@ -101,9 +97,15 @@ class _DashboardState extends State<Dashboard> {
                   controller: emailController,
                   decoration: const InputDecoration(labelText: "Email"),
                 ),
-                TextField(
-                  controller: genderController,
-                  decoration: const InputDecoration(labelText: "Gender"),
+                SwitchListTile(
+                  title: const Text("Gender"),
+                  subtitle: Text(isMale ? "Male" : "Female"),
+                  value: isMale,
+                  onChanged: (bool value) {
+                    setState(() {
+                      isMale = value; // Toggle between Male and Female
+                    });
+                  },
                 ),
                 TextField(
                   controller: phoneController,
@@ -124,7 +126,7 @@ class _DashboardState extends State<Dashboard> {
                 database.updateUsers(context, tableName, id, {
                   "name": nameController.text,
                   "email": emailController.text,
-                  "gender": genderController.text,
+                  "gender": isMale ? 'Male' : 'Female', // Update gender as Male or Female
                   "phone": phoneController.text,
                 });
                 Navigator.pop(context);
@@ -136,6 +138,7 @@ class _DashboardState extends State<Dashboard> {
       },
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
