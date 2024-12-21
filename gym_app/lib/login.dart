@@ -4,6 +4,7 @@ import 'package:gym_app/signup.dart';
 import 'package:gym_app/calculations.dart';
 import 'package:gym_app/text_field.dart';
 import 'button.dart';
+import 'dashboard.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -30,10 +31,15 @@ class _LoginState extends State<Login> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("User Login successfully!")),
       );
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => Calculations(uid: user.uid)));
+      if (_emailController.text == "aqeel@gmail.com") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const Dashboard()));
+      } else {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Calculations(uid: user.uid)));
+      }
     }
     else {
       ScaffoldMessenger.of(context).showSnackBar(
