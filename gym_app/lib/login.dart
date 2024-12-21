@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/auth_service.dart';
 import 'package:gym_app/signup.dart';
 import 'package:gym_app/calculations.dart';
 import 'package:gym_app/text_field.dart';
-
 import 'button.dart';
 
 class Login extends StatefulWidget {
@@ -15,6 +15,39 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final auth = AuthService();
+
+  void login() async {
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please fill in all fields.")),
+      );
+      return;
+    }
+    final user = await auth.logInUserWithEmailAndPassword(
+        context, _emailController.text, _passwordController.text);
+    if (user != null){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("User Login successfully!")),
+      );
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Calculations()));
+    }
+    else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Failed to Login user. Please try again.")),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,12 +100,7 @@ class _LoginState extends State<Login> {
                   CustomButton(
                     text: "Login",
                     size: Theme.of(context).textTheme.bodyMedium!,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Calculations()));
-                    },
+                    onPressed: login
                   ),
                   const SizedBox(height: 24),
                   TextButton(

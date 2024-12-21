@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/auth_service.dart';
+import 'package:gym_app/database.dart';
 import 'package:gym_app/text_field.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -11,6 +13,7 @@ class RegistrationPage extends StatefulWidget {
 class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
@@ -42,24 +45,42 @@ class _RegistrationPageState extends State<RegistrationPage> {
     });
   }
 
-  void _register() {
+  void _register() async {
     if (_formKey.currentState!.validate()) {
-      // Perform registration logic here
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text("Registration Successful"),
-          content: Text(
-            "Welcome, ${_nameController.text}! You have chosen the $_packageType package.",
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text("OK"),
-            ),
-          ],
-        ),
+      final auth = AuthService();
+      final dataBase = DataBaseService();
+
+      // Create user with email and password
+      final user = await auth.createUserWithEmailAndPassword(
+        context,
+        _emailController.text,
+        _passwordController.text,
       );
+
+      if (user != null) {
+        // Prepare user data
+        final userData = {
+          'name': _nameController.text,
+          'email': _emailController.text,
+          'phone': _phoneController.text,
+          'gender': _gender,
+          'package': _packageType,
+          'price': _price,
+          'message': _messageController.text,
+        };
+
+        // Add user to the database
+        dataBase.registerUser(context, user.uid, userData);
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("User registered successfully!")),
+        );
+        Navigator.pop(context); // Navigate back to the previous screen
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Failed to register user. Please try again.")),
+        );
+      }
     }
   }
 
@@ -83,7 +104,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 12,),
+                    const SizedBox(height: 12),
                     Text(
                       "Register For Membership",
                       style: Theme.of(context).textTheme.displayLarge,
@@ -106,6 +127,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       prefixIcon: Icons.mail,
                       fillColor: Colors.black.withOpacity(0.1),
                       keyboardType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(height: 16),
+                    TextFieldInput(
+                      controller: _passwordController,
+                      hintText: "Enter Your Password",
+                      obscureText: true,
+                      prefixIcon: Icons.password,
+                      fillColor: Colors.black,
+                      keyboardType: TextInputType.visiblePassword,
                     ),
                     const SizedBox(height: 16),
                     TextFieldInput(
@@ -159,8 +189,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                       ),
                       readOnly: true,
-                      validator: (value) =>
-                      value == null || value.isEmpty
+                      validator: (value) => value == null || value.isEmpty
                           ? 'Please select a package'
                           : null,
                     ),
@@ -183,12 +212,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 48.0, vertical: 15.0),
                       ),
-                      child: Text(
-                        "Register YourSelf",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall),
-                      ),
+                      child: Text("Register Yourself",
+                          style: Theme.of(context).textTheme.headlineSmall),
+                    ),
                     const SizedBox(height: 24),
                   ],
                 ),

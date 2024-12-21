@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gym_app/appbar.dart';
 import 'package:gym_app/home.dart';
@@ -6,7 +7,10 @@ import 'package:gym_app/trainer.dart';
 import 'package:gym_app/classes.dart';
 import 'package:gym_app/package.dart';
 
-void main() {
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

@@ -55,4 +55,3 @@ class _CalculationsState extends State<Calculations> {
   }
 }
 
-
