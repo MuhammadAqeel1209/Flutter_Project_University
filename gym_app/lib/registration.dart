@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gym_app/auth_service.dart';
 import 'package:gym_app/database.dart';
 import 'package:gym_app/text_field.dart';
+import 'dart:math';
+
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
@@ -13,7 +15,6 @@ class RegistrationPage extends StatefulWidget {
 class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
@@ -45,19 +46,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
     });
   }
 
+  String generateRandomId(int length) {
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    final random = Random();
+    return List.generate(length, (index) => chars[random.nextInt(chars.length)]).join();
+  }
+
+
   void _register() async {
     if (_formKey.currentState!.validate()) {
-      final auth = AuthService();
       final dataBase = DataBaseService();
 
-      // Create user with email and password
-      final user = await auth.createUserWithEmailAndPassword(
-        context,
-        _emailController.text,
-        _passwordController.text,
-      );
+      try {
+        // Generate a random ID for the user
+        final Id = generateRandomId(12); // Example: Generates a 12-character random ID
 
-      if (user != null) {
         // Prepare user data
         final userData = {
           'name': _nameController.text,
@@ -69,20 +72,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
           'message': _messageController.text,
         };
 
-        // Add user to the database
-        dataBase.registerUser(context, user.uid, userData);
+        // Add user data to the database using the random ID
+        await dataBase.registerUser(context, Id, userData);
 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("User registered successfully!")),
         );
+
         Navigator.pop(context); // Navigate back to the previous screen
-      } else {
+      } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Failed to register user. Please try again.")),
+          SnackBar(content: Text("An error occurred: $e")),
         );
       }
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -129,15 +134,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(height: 16),
-                    TextFieldInput(
-                      controller: _passwordController,
-                      hintText: "Enter Your Password",
-                      obscureText: true,
-                      prefixIcon: Icons.password,
-                      fillColor: Colors.black,
-                      keyboardType: TextInputType.visiblePassword,
-                    ),
-                    const SizedBox(height: 16),
+                  
                     TextFieldInput(
                       controller: _phoneController,
                       hintText: "Enter Your Phone Number",
