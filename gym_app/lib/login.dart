@@ -93,15 +93,7 @@ class _LoginState extends State<Login> {
                     fillColor: Colors.black,
                     keyboardType: TextInputType.visiblePassword,
                   ),
-                  const SizedBox(height: 16),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text("Forgot Password?",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge
-                            ?.copyWith(color: Colors.white)),
-                  ),
+
                   const SizedBox(height: 16),
                   CustomButton(
                     text: "Login",

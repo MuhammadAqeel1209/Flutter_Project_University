@@ -5,8 +5,8 @@ class AuthService {
   final _auth = FirebaseAuth.instance;
 
   bool _isAlphanumeric(String password) {
-    final alphanumericRegex = RegExp(r'^[a-zA-Z0-9]+$');
-    return alphanumericRegex.hasMatch(password);
+    final passwordRegex = RegExp(r'^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).+$');
+    return passwordRegex.hasMatch(password);
   }
 
   /// Create a new user with email and password

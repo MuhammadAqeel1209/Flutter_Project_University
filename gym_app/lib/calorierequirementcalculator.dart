@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/slider.dart';
-
+import 'package:gym_app/text_field.dart';
 import 'button.dart';
 
 class CalorieRequirementCalculator extends StatefulWidget {
@@ -15,10 +15,23 @@ class _CalorieRequirementCalculatorState
     extends State<CalorieRequirementCalculator> {
   double weight = 60; // Default weight
   double height = 170; // Default height
-  double age = 25; // Default age
+  final TextEditingController ageController = TextEditingController();
   double? calorieRequirement;
 
+  /// Calculate Calorie Requirement Based on Gender and Activity Factor
   void calculateCalories(String gender, double activityFactor) {
+    final ageText = ageController.text;
+
+    // Validate age input
+    if (ageText.isEmpty || double.tryParse(ageText) == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please enter a valid age")),
+      );
+      return;
+    }
+
+    double age = double.parse(ageText);
+
     double bmr;
     if (gender == 'male') {
       bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
@@ -37,8 +50,9 @@ class _CalorieRequirementCalculatorState
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
           elevation: 8,
           child: Padding(
             padding: const EdgeInsets.all(24.0),
@@ -46,8 +60,8 @@ class _CalorieRequirementCalculatorState
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  textAlign: TextAlign.center,
                   "Calorie Requirement Calculator",
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Colors.blueAccent,
                         fontWeight: FontWeight.bold,
@@ -71,16 +85,14 @@ class _CalorieRequirementCalculatorState
                 ),
                 const SizedBox(height: 10),
 
-                SliderInput(
-                  percentage: age,
-                  symbol: "cm",
-                  min: 20,
-                  max: 80,
-                  division: 10,
-                  label: "Age",
-                  onChanged: (value) => setState(() => age = value),
-                  activeColor: Colors.blueAccent,
-                  inactiveColor: Colors.blueAccent.withOpacity(0.3),
+                // Age Input
+                TextFieldInput(
+                  controller: ageController,
+                  hintText: "Enter Your Age",
+                  obscureText: false,
+                  prefixIcon: Icons.calendar_today,
+                  fillColor: Colors.black,
+                  keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: 10),
 
@@ -109,8 +121,8 @@ class _CalorieRequirementCalculatorState
                   inactiveColor: Colors.blueAccent.withOpacity(0.3),
                 ),
                 const SizedBox(height: 20),
-                // Male Button
 
+                // Male Button
                 CustomButton(
                   text: "Male - Moderate",
                   size: Theme.of(context).textTheme.headlineSmall!,
